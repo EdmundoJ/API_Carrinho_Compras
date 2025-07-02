@@ -155,30 +155,5 @@ namespace Shopping.API.Infrastructure.Repositories
                 throw;
             }
         }
-
-
-        //public async Task<bool> RemoveProductAsync(int productId)
-        //{
-        //    using var connection = _dbContext.CreateConnection();
-        //    connection.Open();
-        //    using var transaction = connection.BeginTransaction();
-
-        //    try
-        //    {
-        //        var affectedRows = await connection.ExecuteAsync(
-        //            "DELETE FROM Product WHERE ProductId = @ProductId",
-        //            new { ProductId = productId },
-        //            transaction);
-
-        //        transaction.Commit();
-
-        //        return affectedRows > 0;
-        //    }
-        //    catch
-        //    {
-        //        transaction.Rollback();
-        //        throw;
-        //    }
-        //}
     }
 }
