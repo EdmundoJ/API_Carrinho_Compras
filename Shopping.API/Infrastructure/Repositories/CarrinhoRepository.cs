@@ -44,7 +44,7 @@ namespace Shopping.API.Infrastructure.Repositories
 
                 foreach (var prod in produtoCarrinho)
                 {
-                    calculo = calculo + (prod.Preco * item.QuantidadeProd);
+                    calculoValorTotal = calculoValorTotal + (prod.Preco * item.QuantidadeProd);
                 }
                
 
