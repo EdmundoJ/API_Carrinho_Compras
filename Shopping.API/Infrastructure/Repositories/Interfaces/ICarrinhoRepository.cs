@@ -9,7 +9,7 @@ namespace Shopping.API.Infrastructure.Repositories.Interfaces
         Task<Carrinho?> GetCarrinhoPorIdAsync(int idCarrinho);
         //Task<Cart> CreateAsync(CartRequest cartRequest);
         //Task<bool> UpdateCartDiscountPercentage(Cart cart);
-        //Task<bool> DeleteAsync(int cartId);
+        Task<bool> DeleteItemAsync(int idCarrinho, int produtoId);
         //Task<Product?> GetProductByIdAsync(int productId);
         //Task AddProductAsync(Product product);
         //Task<bool> UpdateProductAsync(Product product);

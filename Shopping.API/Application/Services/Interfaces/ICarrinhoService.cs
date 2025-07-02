@@ -7,9 +7,9 @@ namespace Shopping.API.Application.Services.Interfaces
     public interface ICarrinhoService
     {
         Task<Carrinho?> GetCarrinhoPorIdAsync(int idCarrinho);
-       // Task<int> CriaCarrinho();
+        // Task<int> CriaCarrinho();
         //Task<Cart> CreateCartAsync(CartRequest shoppingCartRequest);
-        //Task<bool> DeleteCartAsync(int id);
+        Task<bool> RemoveProdutoCarrinhoAsync(int idCarrinho, int produtoId);
         //Task<Product?> GetProductByIdAsync(int id);
         //Task<decimal> GetCartTotalAsync(int cartId);
         //Task<Product> AddProductToCartAsync(int cartId, Product product);

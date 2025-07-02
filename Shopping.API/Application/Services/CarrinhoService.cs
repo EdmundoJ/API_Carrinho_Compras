@@ -40,7 +40,15 @@ namespace Shopping.API.Application.Services
             return carrinho;
         }
 
-       
+        public async Task<bool> RemoveProdutoCarrinhoAsync(int idCarrinho, int produtoId)
+        {
+            if (produtoId <= 0 || idCarrinho <=0)
+                throw new ArgumentException("Id de Produto ou id Carrinho inválido.");
+
+            return await _carrinhoRepository.DeleteItemAsync(idCarrinho, produtoId);
+        }
+
+
 
         //public async Task<Cart> CreateCartAsync(CartRequest cartRequest)
         //{

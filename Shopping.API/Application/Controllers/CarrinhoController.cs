@@ -49,7 +49,17 @@ namespace Shopping.API.Application.Controllers
         }
 
 
+        [HttpDelete("carrinhos/{idCarrinho}/itens{produtoId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> RemoveProdutoCarrinho(int idCarrinho, int produtoId)
+        {
+            await _carrinhoService.RemoveProdutoCarrinhoAsync(idCarrinho, produtoId);
+            return NoContent();
+        }
 
-        
+
     }
 }

@@ -98,7 +98,7 @@ namespace Shopping.API.Infrastructure.Repositories
         //    }
         //}
 
-        public async Task<bool> DeleteAsync(int cartId)
+        public async Task<bool> DeleteItemAsync(int idCarrinho, int produtoId)
         {
             using var connection = _dbContext.CreateConnection();
             connection.Open();
@@ -106,15 +106,16 @@ namespace Shopping.API.Infrastructure.Repositories
 
             try
             {
-                await connection.ExecuteAsync(
-                    "DELETE FROM Product WHERE CartId = @CartId",
-                    new { CartId = cartId },
+                
+                var affectedRows = await connection.ExecuteAsync(
+                    "DELETE FROM ItensCarrinho WHERE IdProd = @produtoId AND IdCarrinho = @idCarrinho",
+                    new { IdProd = produtoId, IdCarrinho = idCarrinho },
                     transaction);
 
-                var affectedRows = await connection.ExecuteAsync(
-                    "DELETE FROM Cart WHERE CartId = @CartId",
-                    new { CartId = cartId },
-                    transaction);
+                //var affectedRows = await connection.ExecuteAsync(
+                //    "DELETE FROM Cart WHERE CartId = @CartId",
+                //    new { CartId = cartId },
+                //    transaction);
 
                 transaction.Commit();
 
@@ -126,6 +127,8 @@ namespace Shopping.API.Infrastructure.Repositories
                 throw;
             }
         }
+
+       
 
         //public async Task<Product?> GetProductByIdAsync(int productId)
         //{
