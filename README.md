@@ -7,15 +7,6 @@
 
 Um Microsserviço baseado em um carrinho de loja virtual, feito com .NET 8, SQL Server, Redis, and Docker.
 
-## 📋 Features
-
-- Cart management
-- Product operations
-- Discount application
-- Payment processing
-- Redis caching
-- Docker containerization
-- Global error handling
 
 ## 🚀 Tecnologias
 
@@ -31,8 +22,15 @@ Um Microsserviço baseado em um carrinho de loja virtual, feito com .NET 8, SQL 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [Git](https://git-scm.com/)
 
-## 🐳 início rápido
+## 🐳 início
 
+```bash
+git clone https://github.com/EdmundoJ/API_Carrinho_Compras.git
+execute no no ms sql server o script init.sql que se encontra na pasta "API_Carrinho_Compras\sqlserver", para ter o banco criado com seus respectivos campos.
+Pelo visual studio, dentro da aplicação, mude a string de conexão no AppSettings.json. 
+Em seguida rode a aplicação
+
+## 🐳 Início rápido (Em Desenvolvimento)
 ```bash
 git clone https://github.com/EdmundoJ/API_Carrinho_Compras.git
 cd shopping-api
@@ -103,44 +101,25 @@ QuantidadeProd          | INT       | Quantidade produto
 
 ## 🌐 API Endpoints
 
-### 🛒 Cart Endpoints
+### 🛒 Carrinho Endpoints
 
-Carrinho
-
+criados
 
 -**POST**`/carrinhos` - Cria um carrinho
 
 
--**GET** `/carrinhos/{idCarrinho}`
+-**GET** `/carrinhos/{idCarrinho}` - Trás todos os itens dentro de um carrinho OBS:(Falta calcular o valor total).
 
 
 -**DELETE** `/api/Carrinho/carrinhos/{idCarrinho}/itens{produtoId}`
 
+Pendentes/ Em desenvolvimento
 
+-**POST** '/carrinhos/{carrinhoId}/itens: Adiciona um item ao carrinho.'
 
+-**POST** '/carrinhos/{carrinhoId}/desconto: Aplica um desconto ao'
+carrinho.
 
-## 🔄 Payment Flow
-
-sequenceDiagram
-    participant Client
-    participant API
-    participant Redis
-    participant SQLServer
-    participant PaymentAPI
-    
-    Client->>API: POST /api/payment/{cartId}
-    API->>Redis: Get cached total
-    alt Cache exists
-        Redis-->>API: Return total
-    else
-        API->>SQLServer: Calculate total
-        SQLServer-->>API: Return total
-        API->>Redis: Cache total
-    end
-    API->>PaymentAPI: Process payment
-    PaymentAPI-->>API: Confirm payment
-    API->>SQLServer: Create order
-    API-->>Client: Return result
 
 ## ⚠️ Error Handling
 

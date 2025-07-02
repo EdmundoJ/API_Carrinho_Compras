@@ -43,7 +43,7 @@ static void ConfigureService(WebApplicationBuilder builder)
         options.Configuration = builder.Configuration.GetConnectionString("Redis");
     });
 
-    builder.Services.AddScoped<ICacheService, CacheService>();
+   // builder.Services.AddScoped<ICacheService, CacheService>();
 
     builder.Services.AddScoped<ICarrinhoRepository, CarrinhoRepository>();
   

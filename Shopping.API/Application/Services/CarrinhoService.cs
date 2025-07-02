@@ -8,16 +8,16 @@ namespace Shopping.API.Application.Services
     public class CarrinhoService : ICarrinhoService
     {
         private readonly ICarrinhoRepository _carrinhoRepository;
-        private readonly ICacheService _cacheService;
+        //private readonly ICacheService _cacheService;
         private readonly ILogger<CarrinhoService> _logger;
 
         public CarrinhoService(
             ICarrinhoRepository carrinhoRepository,
-            ICacheService cacheService,
+           // ICacheService cacheService,
             ILogger<CarrinhoService> logger)
         {
             _carrinhoRepository = carrinhoRepository;
-            _cacheService = cacheService;
+           // _cacheService = cacheService;
             _logger = logger;
         }
        
