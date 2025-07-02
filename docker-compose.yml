@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver_shopping
+    restart: always
+    environment:
+      SA_PASSWORD: "S3nh@F0rt3!"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+      - ./sqlserver/init.sql:/tmp/init.sql
+    networks:
+    - shop
+
+  mssqltools:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      sqlserver:
+        condition: service_started
+    volumes:
+      - ./sqlserver/init.sql:/tmp/init.sql
+    command: >
+      /bin/bash -c "
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver_shopping -U sa -P S3nh@F0rt3! -d master -i /tmp/init.sql"
+    networks:
+    - shop
+
+
+  redis:
+    image: redis:latest
+    container_name: redis_shopping
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: ["redis-server", "--appendonly", "yes"]
+    networks:
+    - shop
+
+  shopping.api:
+    image: ${DOCKER_REGISTRY-}shoppingapi
+    build:
+      context: .
+      dockerfile: Shopping.API/Dockerfile
+    depends_on:
+      sqlserver:
+        condition: service_started
+      redis:
+        condition: service_started
+    networks:
+    - shop
+networks:
+  shop:
+    driver: bridge
+
+volumes:
+  sqlserver_data:
+    driver: local
+  redis_data:
+    driver: local
