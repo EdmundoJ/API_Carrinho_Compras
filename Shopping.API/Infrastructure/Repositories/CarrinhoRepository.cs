@@ -31,6 +31,7 @@ namespace Shopping.API.Infrastructure.Repositories
                 "SELECT * FROM ItensCarrinho WHERE IdCarrinho = @idCarrinho",
                 new { IdCarrinho = idCarrinho });
 
+            decimal calculoValorTotal = 0;
             foreach (var item in itensCar)
             {
                carrinho.ItensCarrinho = itensCar.ToList();
@@ -41,9 +42,16 @@ namespace Shopping.API.Infrastructure.Repositories
                  $"SELECT * FROM Produto WHERE idProd = {idProduto}",
                  new { idProd = idProduto });
 
-                carrinho.Produtos.AddRange(produtoCarrinho.ToList());
-            }
+                foreach (var prod in produtoCarrinho)
+                {
+                    calculo = calculo + (prod.Preco * item.QuantidadeProd);
+                }
+               
 
+                carrinho.Produtos.AddRange(produtoCarrinho.ToList());
+                
+            }
+            carrinho.SubTotal = calculoValorTotal;
 
             return carrinho;
         }
