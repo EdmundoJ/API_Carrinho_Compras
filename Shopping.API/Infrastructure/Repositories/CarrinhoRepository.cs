@@ -1,9 +1,7 @@
 ﻿// CartRepository.cs
 using Dapper;
 using EdCommerce.Domain.Models;
-using EdCommerce.Domain.Models;
 using EdCommerce.Domain.Models.Request;
-using Shopping.API.Domain.Models.Request;
 using Shopping.API.Infrastructure.Data.Interfaces;
 using Shopping.API.Infrastructure.Repositories.Interfaces;
 
@@ -24,7 +22,7 @@ namespace Shopping.API.Infrastructure.Repositories
 
             var carrinho = await connection.QueryFirstOrDefaultAsync<Carrinho>(
                 "SELECT * FROM Carrinho WHERE IdCarrinho = @idCarrinho",
-                new { IdCarrinho = idCarrinho });
+                new { idCarrinho = idCarrinho });
 
             if (carrinho == null)
                 return null;

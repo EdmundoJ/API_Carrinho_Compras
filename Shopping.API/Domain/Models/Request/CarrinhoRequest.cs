@@ -1,5 +1,4 @@
-﻿using Shopping.API.Domain.Models.Request;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace EdCommerce.Domain.Models.Request

@@ -9,8 +9,11 @@
             DataCriacao = dataCriacao ?? DateTime.UtcNow;
             SubTotal = 0;
         }
+
+        public Carrinho() { }
+
         public int IdCarrinho { get; set; }
-        public string CPF { get; set; }
+        public string CPF { get; set; } = string.Empty;
         public DateTime? DataCriacao { get; set; }
 
         public decimal SubTotal { get; set; }

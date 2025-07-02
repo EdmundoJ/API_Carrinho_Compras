@@ -2,9 +2,6 @@
 using EdCommerce.Domain.Models.Request;
 using Microsoft.AspNetCore.Mvc;
 using Shopping.API.Application.Services.Interfaces;
-using Shopping.API.Domain.Models;
-using Shopping.API.Domain.Models.Request;
-using System.Diagnostics.Contracts;
 
 namespace Shopping.API.Application.Controllers
 {
@@ -60,6 +57,17 @@ namespace Shopping.API.Application.Controllers
             await _carrinhoService.RemoveProdutoCarrinhoAsync(idCarrinho, produtoId);
             return NoContent();
         }
+
+        //[HttpPost("/carrinhos/{carrinhoId}/itens/{idProd}", Name = "AdicionaItem")]
+        //[ProducesResponseType(typeof(Carrinho), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<IActionResult> AdicionaItem(int carrinhoId, int idProd)
+        //{
+        //    var resultado = await _carrinhoService.AdicionaItem(carrinhoId , idProd);
+        //    return Created("api/carrinhos", resultado);
+        //}
 
 
     }

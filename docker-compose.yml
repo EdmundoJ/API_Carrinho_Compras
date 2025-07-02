@@ -6,7 +6,7 @@ services:
     container_name: sqlserver_shopping
     restart: always
     environment:
-      SA_PASSWORD: "S3nh@F0rt3!"
+      SA_PASSWORD: "S3nh@f4!"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
@@ -25,7 +25,7 @@ services:
       - ./sqlserver/init.sql:/tmp/init.sql
     command: >
       /bin/bash -c "
-      /opt/mssql-tools/bin/sqlcmd -S sqlserver_shopping -U sa -P S3nh@F0rt3! -d master -i /tmp/init.sql"
+      /opt/mssql-tools/bin/sqlcmd -S sqlserver_shopping -U sa -P S3nh@f4! -d master -i /tmp/init.sql"
     networks:
     - shop
 

@@ -1,11 +1,11 @@
-# 🛒 Shopping API
+# 🛒 EdCommerce API
 
 [![.NET](https://img.shields.io/badge/.NET-8.0-blue)](https://dotnet.microsoft.com/)
 [![Docker](https://img.shields.io/badge/Docker-✓-blue)](https://www.docker.com/)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-red)](https://www.microsoft.com/sql-server)
 [![Redis](https://img.shields.io/badge/Redis-✓-red)](https://redis.io/)
 
-A microservices-based shopping cart API with payment integration, built with .NET 8, SQL Server, Redis, and Docker.
+Um Microsserviço baseado em um carrinho de loja virtual, feito com .NET 8, SQL Server, Redis, and Docker.
 
 ## 📋 Features
 
@@ -17,24 +17,24 @@ A microservices-based shopping cart API with payment integration, built with .NE
 - Docker containerization
 - Global error handling
 
-## 🚀 Technologies
+## 🚀 Tecnologias
 
 - **Backend**: .NET 8 Web API
-- **Database**: SQL Server 2022
+- **Database**: SQL Server 2019
 - **Cache**: Redis
 - **Containerization**: Docker
 - **ORM**: Dapper
 
-## ⚙️ Prerequisites
+## ⚙️ Pré-requisitos
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [Git](https://git-scm.com/)
 
-## 🐳 Quick Start
+## 🐳 início rápido
 
 ```bash
-git clone https://github.com/your-username/shopping-api.git
+git clone https://github.com/EdmundoJ/API_Carrinho_Compras.git
 cd shopping-api
 docker-compose up -d
 ```
@@ -49,68 +49,75 @@ docker-compose up -d
 Shopping.API/
   Application/
     Controllers/          (API endpoints)
-    Services/            (Business logic implementations)
+    Services/            (Implementações de lógica de negócios)
     Services/Interfaces/ (Service contracts)
   
   Domain/
-    Models/              (Core domain entities)
+    Models/              (Entidades de domínio principais)
     Models/Request/      (Input DTOs)
     Models/Response/     (Output DTOs)
   
   Infrastructure/
-    Data/                (Data context and configurations)
-    Repositories/        (Data access implementations)
-    Repositories/Interfaces/ (Repository contracts)
+    Data/                (Contexto e configurações de dados)
+    Repositories/        (Acesso aos dados de implementação)
+    Repositories/Interfaces/ (Contratos de Repositório)
   
   Root files:
     Program.cs           (Main application configuration)
-    Dockerfile           (Docker container setup)
+    Dockerfile           (Docker container configurações)
     docker-compose.yml   (Service orchestration)
 ```
 
 ## 📊 Database Schema
 
-Cart Table
+Carrinho Tabela
 Column	            | Type	        | Description
 --------------------|---------------|----------------
-CartId	            | INT	          | Primary Key
-PayerDocument	      | VARCHAR(20)	  | CPF/CNPJ
-CreatedAt	          | DATETIME	    | Creation date
-DiscountPercentage	| DECIMAL(5,2)	| Discount %
+IdCarrinho                | INT	          | Primary Key
+SubTotal 		  | VARCHAR(20)	  |  Valor
+DataCriacao 		  | DATETIME	  | Creation date
+CPF | NVARCHAR(11)	  | CPF/CNPJ
 
-Product Table
+Produto Tabela
 Column	            | Type	        | Description
 --------------------|---------------|----------------
-ProductId           |	INT	          | Primary Key
-CartId	            | INT	          | Foreign Key
-ProductName	        | VARCHAR(100)	| Product name
-Quantity	          | INT	          | Quantity
-Price	              | DECIMAL(10,2)	| Unit price
+idProd 			|	INT	| Primary Key
+Nome 			| VARCHAR(100)	| Nome Produto
+Preco 			| DECIMAL(10,2)	| Valor unitário
 
-Order Table
+Desconto Tabela
 Column	            | Type	        | Description
 --------------------|---------------|---------------
-OrderId	            | INT	          | Primary Key
-CartId	            | INT	          | Foreign Key
-PaymentId	          | VARCHAR(50)	  | Payment ID
-PaymentStatus	      | VARCHAR(20)	  | Status
-CreatedAt	          | DATETIME	    | Creation date
+Id	            INT	          | Primary Key
+IdCarrinho 	            | INT	          | Foreign Key
+SubTotal 		    | DECIMAL (17,2)	  | Valor a pagar após desconto
+DataCriacao 		    | DATETIME	    | Data do registro
+
+ItensCarrinhoTabela
+Column	            | Type	        | Description
+--------------------|---------------|----------------
+IdItem 			| INT	    | Primary Key
+IdCarrinho 		| INT	    | Carrinho Id
+IdProd 			| INT	    | Produto Id 
+QuantidadeProd          | INT       | Quantidade produto
 
 ## 🌐 API Endpoints
 
 ### 🛒 Cart Endpoints
 
-- **GET** `/api/cart/{cartId}` - Get cart  
-- **POST** `/api/cart` - Create cart  
-- **DELETE** `/api/cart/{cartId}` - Delete cart  
-- **POST** `/api/cart/{cartId}/products` - Add product  
-- **PUT** `/api/cart/products/{productId}` - Update product  
-- **DELETE** `/api/cart/products/{productId}` - Remove product  
-- **PUT** `/api/cart/{cartId}/discount` - Apply discount  
+Carrinho
 
-### 💳 Payment Endpoints
 
-- **POST** `/api/payment/{cartId}` - Process payment  
+-**POST**`/carrinhos` - Cria um carrinho
+
+
+-**GET** `/carrinhos/{idCarrinho}`
+
+
+-**DELETE** `/api/Carrinho/carrinhos/{idCarrinho}/itens{produtoId}`
+
+
+
 
 ## 🔄 Payment Flow
 
@@ -147,30 +154,4 @@ Standardized error responses:
   "detail": "Cart not found"
 }
 ```
-## 🔒 Payment Integration
 
-Example request:
-
-```json
-{
-  "cart_id": 123,
-  "amount": 10.00,
-  "payer_document": "12312312389"
-}
-```
-## 📊 Redis Caching
-
-- Key format: cart_total_{cartId}
-- TTL: 30 minutes
-- Cache invalidation occurs when:
-  . Items are added/removed
-  . Discount is applied
-  . Payment is processed
-
-## 🤝 Contributing
-
-- Fork the project
-- Create your branch (git checkout -b feature/fooBar)
-- Commit changes (git commit -am 'Add some fooBar')
-- Push to branch (git push origin feature/fooBar)
-- Open a Pull Request

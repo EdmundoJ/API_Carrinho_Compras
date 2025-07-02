@@ -1,7 +1,5 @@
 ﻿using EdCommerce.Domain.Models;
 using EdCommerce.Domain.Models.Request;
-using Shopping.API.Domain.Models;
-using Shopping.API.Domain.Models.Request;
 
 namespace Shopping.API.Application.Services.Interfaces
 {
@@ -9,13 +7,8 @@ namespace Shopping.API.Application.Services.Interfaces
     {
         Task<Carrinho?> GetCarrinhoPorIdAsync(int idCarrinho);
         Task<Carrinho> CriaCarrinho(CarrinhoRequest carrinho);
-        //Task<Cart> CreateCartAsync(CartRequest shoppingCartRequest);
+        Task<Carrinho> AdicionaItem(int carrinhoId, ItensCarrinho itensCarrinho);
         Task<bool> RemoveProdutoCarrinhoAsync(int idCarrinho, int produtoId);
-        //Task<Product?> GetProductByIdAsync(int id);
-        //Task<decimal> GetCartTotalAsync(int cartId);
-        //Task<Product> AddProductToCartAsync(int cartId, Product product);
-        //Task<bool> UpdateProductInCartAsync(int productId, Product product);
-        //Task<bool> RemoveProductFromCartAsync(int productId);
-        //Task<bool> ApplyDiscountAsync(int cartId, decimal discountPercentage);
+        
     }
 }
