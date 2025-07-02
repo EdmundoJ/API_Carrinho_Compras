@@ -2,12 +2,18 @@
 {
     public class Carrinho
     {
+        public Carrinho(int idCarrinho, string cpf, DateTime? dataCriacao = null )
+        {
+            IdCarrinho = idCarrinho;
+            CPF = cpf;
+            DataCriacao = dataCriacao ?? DateTime.UtcNow;
+            SubTotal = 0;
+        }
         public int IdCarrinho { get; set; }
+        public string CPF { get; set; }
         public DateTime? DataCriacao { get; set; }
 
         public decimal SubTotal { get; set; }
-        
-        public decimal QuantidadeProd { get; set; }
 
         private List<ItensCarrinho> _itemCarrinho = new List<ItensCarrinho>();
         public List<ItensCarrinho> ItensCarrinho

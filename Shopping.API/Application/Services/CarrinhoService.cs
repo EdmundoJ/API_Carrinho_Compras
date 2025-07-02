@@ -3,6 +3,7 @@ using Shopping.API.Domain.Models;
 using Shopping.API.Domain.Models.Request;
 using Shopping.API.Application.Services.Interfaces;
 using EdCommerce.Domain.Models;
+using EdCommerce.Domain.Models.Request;
 
 namespace Shopping.API.Application.Services
 {
@@ -20,6 +21,11 @@ namespace Shopping.API.Application.Services
             _carrinhoRepository = carrinhoRepository;
             _cacheService = cacheService;
             _logger = logger;
+        }
+
+        public Task<Carrinho> CriaCarrinho(CarrinhoRequest carrinho)
+        {
+            return _carrinhoRepository.CriarCarrinhoAsync(carrinho);
         }
 
         public async Task<Carrinho?> GetCarrinhoPorIdAsync(int idCarrinho)

@@ -1,4 +1,5 @@
 ﻿using EdCommerce.Domain.Models;
+using EdCommerce.Domain.Models.Request;
 using Microsoft.AspNetCore.Mvc;
 using Shopping.API.Application.Services.Interfaces;
 using Shopping.API.Domain.Models;
@@ -20,17 +21,17 @@ namespace Shopping.API.Application.Controllers
             _carrinhoService = carrinhoService;
             _logger = logger;
         }
-        //[HttpPost("/carrinhos", Name = "CriaCarrinho")]
-        //[ProducesResponseType(typeof(Carrinho), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status404NotFound)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public int CriaCarinho()
-        //{
-        //    _carrinhoService.CriaCarrinho();
-        //    return Ok("Novo carrinho criado com sucesso.");
-        //}
 
+        [HttpPost("/carrinhos", Name = "CriaCarrinho")]
+        [ProducesResponseType(typeof(Carrinho), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CriaCarinho([FromBody] CarrinhoRequest carrinho)
+        {
+            var resultado = await _carrinhoService.CriaCarrinho(carrinho);
+            return Created("api/carrinhos",resultado);
+        }
 
         [HttpGet("/carrinhos/{idCarrinho}", Name = "RetornaItensTotalById")]
         [ProducesResponseType(typeof(Carrinho), StatusCodes.Status200OK)]

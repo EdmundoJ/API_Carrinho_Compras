@@ -1,4 +1,5 @@
 ﻿using EdCommerce.Domain.Models;
+using EdCommerce.Domain.Models.Request;
 using Shopping.API.Domain.Models;
 using Shopping.API.Domain.Models.Request;
 
@@ -7,7 +8,7 @@ namespace Shopping.API.Application.Services.Interfaces
     public interface ICarrinhoService
     {
         Task<Carrinho?> GetCarrinhoPorIdAsync(int idCarrinho);
-        // Task<int> CriaCarrinho();
+        Task<Carrinho> CriaCarrinho(CarrinhoRequest carrinho);
         //Task<Cart> CreateCartAsync(CartRequest shoppingCartRequest);
         Task<bool> RemoveProdutoCarrinhoAsync(int idCarrinho, int produtoId);
         //Task<Product?> GetProductByIdAsync(int id);
