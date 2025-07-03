@@ -22,9 +22,9 @@ namespace Shopping.API.Application.Services
         }
        
 
-        public void  AdicionaItem(ItemRequest itensCarrinho, int carrinhoId)
+        public void  AdicionaItem(int idCarrinho, int idProd, int quantidadeProd)
         {
-             _carrinhoRepository.AdicionaItem(itensCarrinho, carrinhoId);
+             _carrinhoRepository.AdicionaItem(idCarrinho, idProd, quantidadeProd);
         }
 
         public Task<Carrinho> CriaCarrinho(CarrinhoRequest carrinho)

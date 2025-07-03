@@ -58,15 +58,14 @@ namespace Shopping.API.Application.Controllers
             return NoContent();
         }
 
-        [HttpPost("/carrinhos/{carrinhoId}/itens/", Name = "AdicionaItem")]
+        [HttpPost("/carrinhos/{idCarrinho}/itens", Name = "AdicionaItem")]
         [ProducesResponseType(typeof(ItensCarrinho), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public  void  AdicionaItem([FromBody] ItemRequest itemRequest , int carrinhoId)
+        public  void  AdicionaItem( int idCarrinho, int idProd, int quantidadeProd)
         {
-             _carrinhoService.AdicionaItem(itemRequest, carrinhoId);
-            
+               _carrinhoService.AdicionaItem(idCarrinho, idProd,  quantidadeProd);
         }
 
 

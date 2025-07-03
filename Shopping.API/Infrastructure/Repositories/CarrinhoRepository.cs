@@ -108,20 +108,22 @@ namespace Shopping.API.Infrastructure.Repositories
             }
         }
 
-        public void  AdicionaItem(ItemRequest itensCarrinho , int carrinhoId)
+        public async void  AdicionaItem(int idCarrinho, int idProd, int quantidadeProd)
         {
+           
             using var connection = _dbContext.CreateConnection();
+            
             connection.Open();
             using var transaction = connection.BeginTransaction();
 
             try
             {
-                var id =  connection.QuerySingleAsync<int>(
-                    @"INSERT INTO ItemCarrinho ( IdProd, QuantidadeProd, IdCarrinho) 
+                 var id = await connection.QuerySingleAsync<int>(
+                    @"INSERT INTO ItensCarrinho ( IdProd, QuantidadeProd, IdCarrinho) 
                           VALUES (@idProd, @quantidadeProd, @idCarrinho);
                           SELECT CAST(SCOPE_IDENTITY() AS INT);",
-                    
-                    new { idProd = itensCarrinho.IdProd,  quantidadeProd = itensCarrinho.QuantidadeProd,  idCarrinho = carrinhoId},
+
+                    new { idProd = idProd, quantidadeProd = quantidadeProd, idCarrinho = idCarrinho },
                     transaction);
 
                 transaction.Commit();
