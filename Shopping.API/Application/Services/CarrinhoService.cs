@@ -22,9 +22,9 @@ namespace Shopping.API.Application.Services
         }
        
 
-        public Task<Carrinho> AdicionaItem(int carrinhoId, ItensCarrinho itensCarrinho)
+        public void  AdicionaItem(ItemRequest itensCarrinho)
         {
-            throw new NotImplementedException();
+             _carrinhoRepository.AdicionaItem(itensCarrinho);
         }
 
         public Task<Carrinho> CriaCarrinho(CarrinhoRequest carrinho)

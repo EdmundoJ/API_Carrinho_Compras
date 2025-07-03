@@ -7,7 +7,7 @@ namespace Shopping.API.Application.Services.Interfaces
     {
         Task<Carrinho?> GetCarrinhoPorIdAsync(int idCarrinho);
         Task<Carrinho> CriaCarrinho(CarrinhoRequest carrinho);
-        Task<Carrinho> AdicionaItem(int carrinhoId, ItensCarrinho itensCarrinho);
+        void  AdicionaItem(ItemRequest itensCarrinho);
         Task<bool> RemoveProdutoCarrinhoAsync(int idCarrinho, int produtoId);
         
     }

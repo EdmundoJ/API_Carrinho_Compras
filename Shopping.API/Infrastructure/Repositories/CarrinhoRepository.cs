@@ -56,54 +56,6 @@ namespace Shopping.API.Infrastructure.Repositories
             return carrinho;
         }
 
-        //public async Task<Carrinho> AdicionaItemAoCarrinho(ItensCarrinho itemRequest)
-        //{
-        //    using var connection = _dbContext.CreateConnection();
-        //    connection.Open();
-        //    using var transaction = connection.BeginTransaction();
-
-        //    try
-        //    {
-        //        var id = await connection.QuerySingleAsync<int>(
-        //            @"INSERT INTO Carrinho (, CreatedAt) 
-        //              VALUES (@PayerDocument, @CreatedAt);
-        //              SELECT CAST(SCOPE_IDENTITY() AS INT);",
-        //            new { ite, cartRequest.CreatedAt },
-        //            transaction);
-
-        //        transaction.Commit();
-
-        //        return new Carrinho();//(id, cartRequest.PayerDocument, 0, cartRequest.CreatedAt);
-        //    }
-        //    catch
-        //    {
-        //        transaction.Rollback();
-        //        throw;
-        //    }
-        //}
-
-        //public async Task<bool> UpdateCartDiscountPercentage(Carrinho carrinho)
-        //{
-        //    using var connection = _dbContext.CreateConnection();
-        //    connection.Open();
-        //    using var transaction = connection.BeginTransaction();
-        //    try
-        //    {
-        //        var affectedRows = await connection.ExecuteAsync(
-        //            "UPDATE Cart SET DiscountPercentage = @DiscountPercentage WHERE CartId = @CartId",
-        //            new { carrinho., carrinho.IdCarrinho},
-        //            transaction);
-        //        transaction.Commit();
-
-        //        return affectedRows > 0;
-        //    }
-        //    catch
-        //    {
-        //        transaction.Rollback();
-        //        throw;
-        //    }
-        //}
-
         public async Task<bool> DeleteItemAsync(int idCarrinho, int produtoId)
         {
             using var connection = _dbContext.CreateConnection();
@@ -148,6 +100,31 @@ namespace Shopping.API.Infrastructure.Repositories
                 transaction.Commit();
 
                 return new Carrinho(id, carrinho.Cpf, carrinho.DataCriacao);
+            }
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
+        }
+
+        public void  AdicionaItem(ItemRequest itensCarrinho)
+        {
+            using var connection = _dbContext.CreateConnection();
+            connection.Open();
+            using var transaction = connection.BeginTransaction();
+
+            try
+            {
+                var id =  connection.QuerySingleAsync<int>(
+                    @"INSERT INTO ItemCarrinho ( IdProd, QuantidadeProd, IdCarrinho) 
+                          VALUES (@idProd, @quantidadeProd, @idCarrinho);
+                          SELECT CAST(SCOPE_IDENTITY() AS INT);",
+                    
+                    new { idProd = itensCarrinho.IdProd,  quantidadeProd = itensCarrinho.QuantidadeProd,  idCarrinho = itensCarrinho.IdCarrinho},
+                    transaction);
+
+                transaction.Commit();
             }
             catch
             {
