@@ -6,15 +6,12 @@
         public int IdItem { get; set; } 
         public int IdProd { get; set; }
         public int QuantidadeProd { get; set; }
-        public int IdCarrinho { get; set; }
 
-        public ItemRequest(int item, int idProd, int quantidadeProd, int idCarrinho)
+        public ItemRequest(int item, int idProd, int quantidadeProd)
         {
             IdItem = item;
             IdProd = idProd;
             QuantidadeProd = quantidadeProd;
-            IdCarrinho = idCarrinho;
-
         }
     }    
 }
