@@ -113,9 +113,9 @@ criados
 
 -**DELETE** `/api/Carrinho/carrinhos/{idCarrinho}/itens{produtoId}`
 
-Pendentes/ Em desenvolvimento
-
 -**POST** '/carrinhos/{carrinhoId}/itens: Adiciona um item ao carrinho.'
+
+Pendente/ Em desenvolvimento
 
 -**POST** '/carrinhos/{carrinhoId}/desconto: Aplica um desconto ao'
 carrinho.
