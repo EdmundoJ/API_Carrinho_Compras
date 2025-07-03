@@ -108,7 +108,7 @@ namespace Shopping.API.Infrastructure.Repositories
             }
         }
 
-        public void  AdicionaItem(ItemRequest itensCarrinho)
+        public void  AdicionaItem(ItemRequest itensCarrinho , int carrinhoId)
         {
             using var connection = _dbContext.CreateConnection();
             connection.Open();
@@ -121,7 +121,7 @@ namespace Shopping.API.Infrastructure.Repositories
                           VALUES (@idProd, @quantidadeProd, @idCarrinho);
                           SELECT CAST(SCOPE_IDENTITY() AS INT);",
                     
-                    new { idProd = itensCarrinho.IdProd,  quantidadeProd = itensCarrinho.QuantidadeProd,  idCarrinho = itensCarrinho.IdCarrinho},
+                    new { idProd = itensCarrinho.IdProd,  quantidadeProd = itensCarrinho.QuantidadeProd,  idCarrinho = carrinhoId},
                     transaction);
 
                 transaction.Commit();
