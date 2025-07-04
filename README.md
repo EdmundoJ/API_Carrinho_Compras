@@ -11,7 +11,7 @@ Um Microsserviço baseado em um carrinho de loja virtual, feito com .NET 8, SQL 
 ## 🚀 Tecnologias
 
 - **Backend**: .NET 8 Web API
-- **Database**: SQL Server 2019
+- **Database**: SQL Server 2022
 - **Cache**: Redis
 - **Containerization**: Docker
 - **ORM**: Dapper
