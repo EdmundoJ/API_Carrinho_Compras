@@ -49,11 +49,4 @@ static void ConfigureService(WebApplicationBuilder builder)
   
 
     builder.Services.AddScoped<ICarrinhoService, CarrinhoService>();
-    //builder.Services.AddScoped<IPaymentService, PaymentService>();
-
-    //builder.Services.AddHttpClient<IPaymentService, PaymentService>(client =>
-    //{
-    //    client.BaseAddress = new Uri("https://rendimentopay.free.beeceptor.com");
-    //    client.Timeout = TimeSpan.FromSeconds(30);
-    //});
 }
