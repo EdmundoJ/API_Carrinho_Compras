@@ -70,7 +70,6 @@ namespace Shopping.API.Infrastructure.Repositories
                     new { produtoId = produtoId, IdCarrinho = idCarrinho },
                     transaction);
 
-
                 transaction.Commit();
 
                 return affectedRows > 0;

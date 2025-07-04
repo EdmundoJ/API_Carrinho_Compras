@@ -113,11 +113,11 @@ criados
 
 -**DELETE** `/api/Carrinho/carrinhos/{idCarrinho}/itens{produtoId}`
 
--**POST** '/carrinhos/{carrinhoId}/itens: Adiciona um item ao carrinho.'
+-**POST** '/carrinhos/{{idCarrinho}}/itens: Adiciona um item ao carrinho.'
 
 Pendente/ Em desenvolvimento
 
--**POST** '/carrinhos/{carrinhoId}/desconto: Aplica um desconto ao'
+-**POST** '/carrinhos/{{idCarrinho}}/desconto: Aplica um desconto ao'
 carrinho.
 
 
